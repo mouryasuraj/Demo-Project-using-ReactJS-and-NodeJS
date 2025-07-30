@@ -10,9 +10,9 @@ const port = process.env.PORT;
 const clientURL = process.env.CLIENT_URL;
 const app = express();
 
+app.use(cors({ origin: clientURL, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: clientURL, credentials: true }));
 
 app.use("/auth", authRouter);
 

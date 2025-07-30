@@ -8,19 +8,21 @@ export const handleSignUp = async (req, res) => {
   try {
     validateSignUpData(req);
 
-    const { fullName, email, password } = req.body;
+    const { fullName, email, password, age, photoUrl } = req.body;
 
     // Hash password
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
-    const createUser = new User({ fullName, email, password:hashedPassword });
+    const createUser = new User({ fullName, email, password:hashedPassword, age, photoUrl });
 
     const userCreated = await createUser.save();
 
     res.status(200).json({ message: "User Created Successfully", user:{
         fullName:userCreated.fullName,
-        email:userCreated.email
+        email:userCreated.email,
+        age:userCreated.age,
+        photoUrl:userCreated.photoUrl
     } });
   } catch (error) {
     handleError(res, error);

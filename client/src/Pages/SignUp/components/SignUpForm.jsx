@@ -2,18 +2,41 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { handleSignUp } from "../services/signupServices";
 import { AppStore } from "../../../Store/AppStore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const SignUpForm = () => {
-    const {setShowToast, setToastMessage, setToastType,setLoading} = useContext(AppStore)
+  const { setShowToast, setToastMessage, setToastType, setLoading } =
+    useContext(AppStore);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [age, setAge] = useState("");
+  const [photoUrl, setPhotoUrl] = useState(
+    "https://images.ctfassets.net/ihx0a8chifpc/gPyHKDGI0md4NkRDjs4k8/36be1e73008a0181c1980f727f29d002/avatar-placeholder-generator-500x500.jpg"
+  );
+  const [showPassword, setShowPassword] = useState(false)
+
   return (
     <form
       className="flex flex-col gap-2"
       onSubmit={(e) => {
         e.preventDefault();
-        handleSignUp(fullName, email, password,setShowToast, setToastMessage, setToastType, setFullName, setEmail, setPassword,setLoading);
+        handleSignUp(
+          fullName,
+          email,
+          password,
+          age,
+          photoUrl,
+          setAge,
+          setPhotoUrl,
+          setShowToast,
+          setToastMessage,
+          setToastType,
+          setFullName,
+          setEmail,
+          setPassword,
+          setLoading
+        );
       }}
     >
       <div className="flex flex-col gap-1">
@@ -25,7 +48,7 @@ const SignUpForm = () => {
           onChange={(e) => setFullName(e.target.value)}
           className="text-[12px] p-2 border-2 border-gray-500 rounded-sm outline-none"
           placeholder="Full Name"
-          />
+        />
       </div>
       <div className="flex flex-col gap-1">
         <legend className="text-sm">Email</legend>
@@ -36,17 +59,42 @@ const SignUpForm = () => {
           onChange={(e) => setEmail(e.target.value)}
           className="text-[12px] p-2 border-2 border-gray-500 rounded-sm outline-none"
           placeholder="Email"
-          />
+        />
       </div>
       <div className="flex flex-col gap-1">
         <legend className="text-sm">Password</legend>
+        <div className="flex items-center p-2 border-2 border-gray-500 rounded-sm">
+          <input
+            required
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="text-[12px] w-full outline-none "
+            placeholder="Password"
+          />
+          <FontAwesomeIcon onClick={() => setShowPassword(!showPassword)} className="cursor-pointer" icon={`fa-solid fa-${showPassword ? "eye-slash" : "eye"}`} />
+        </div>
+      </div>
+      <div className="flex flex-col gap-1">
+        <legend className="text-sm">Age</legend>
         <input
           required
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          type="number"
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
           className="text-[12px] p-2 border-2 border-gray-500 rounded-sm outline-none"
-          placeholder="Password"
+          placeholder="Age"
+        />
+      </div>
+      <div className="flex flex-col gap-1">
+        <legend className="text-sm">Photo URL</legend>
+        <input
+          required
+          type="text"
+          value={photoUrl}
+          onChange={(e) => setPhotoUrl(e.target.value)}
+          className="text-[12px] p-2 border-2 border-gray-500 rounded-sm outline-none"
+          placeholder="Photo URL"
         />
       </div>
 

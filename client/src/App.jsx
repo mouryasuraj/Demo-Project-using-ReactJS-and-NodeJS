@@ -10,6 +10,13 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import makeRequest from "./axios";
 import { AuthStore } from "./Store/AuthStore";
 import Loader from "./components/Loader";
+// Fontawesome
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {fas} from "@fortawesome/free-solid-svg-icons"
+import {far} from "@fortawesome/free-regular-svg-icons"
+import {fab} from "@fortawesome/free-brands-svg-icons"
+
+library.add(fas, far, fab)
 
 function App() {
   const {showToast, toastMessage, toastType,loading,setLoading} = useContext(AppStore)

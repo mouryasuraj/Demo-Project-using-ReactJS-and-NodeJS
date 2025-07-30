@@ -23,7 +23,7 @@ export const validateSignUpData = (req) =>{
     throw new Error("Missing fields")
    }
 
-   const {fullName, email, password} = req.body
+   const {fullName, email, password, age, photoUrl} = req.body
    
 
    const validateIsEmptyField = [
@@ -38,6 +38,14 @@ export const validateSignUpData = (req) =>{
     {
         isValid:!password,
         message:"password is required"
+    },
+    {
+        isValid:!age,
+        message:"age is required"
+    },
+    {
+        isValid:!photoUrl,
+        message:"photoUrl is required"
     },
    ]
    validateIsEmptyField.forEach((data)=>{
@@ -58,6 +66,14 @@ export const validateSignUpData = (req) =>{
     {
         isValid:!validator.isStrongPassword(password, {minLength:8, minLowercase:1, minUppercase:1, minNumbers:1, minSymbols:1}),
         message:"Password is not strong"
+    },
+    {
+        isValid:!(age>=18 || age<=100),
+        message:"Age is not valid, age must be grater than or equal to 18"
+    },
+    {
+        isValid:!validator.isURL(photoUrl),
+        message:"Photo URL is not valid"
     },
    ]
 

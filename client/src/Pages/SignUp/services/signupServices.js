@@ -4,6 +4,10 @@ export const handleSignUp = async (
   fullName,
   email,
   password,
+  age,
+  photoUrl,
+  setAge,
+  setPhotoUrl,
   setShowToast,
   setToastMessage,
   setToastType,
@@ -12,11 +16,13 @@ export const handleSignUp = async (
   setPassword,
   setLoading
 ) => {
-    setLoading(true)
+  setLoading(true);
   const payload = {
     fullName,
     email,
     password,
+    age,
+    photoUrl,
   };
   try {
     const res = await makeRequest.post("/auth/signup", payload);
@@ -27,13 +33,15 @@ export const handleSignUp = async (
     setFullName("");
     setEmail("");
     setPassword("");
+    setAge("") 
+    setPhotoUrl("")
   } catch (error) {
     console.log("Something went wrong: ", error);
     setShowToast(true);
     setToastMessage("Something went wrong");
     setToastType("error");
   } finally {
-    setLoading(false)
+    setLoading(false);
     setTimeout(() => {
       setShowToast(false);
       setToastMessage("");
