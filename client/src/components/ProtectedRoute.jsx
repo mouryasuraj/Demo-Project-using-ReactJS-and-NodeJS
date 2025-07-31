@@ -1,8 +1,6 @@
 import { useContext, useEffect } from "react";
 import { AuthStore } from "../Store/AuthStore";
 import { useNavigate } from "react-router-dom";
-import makeRequest from "../axios";
-import { AppStore } from "../Store/AppStore";
 import Loader from "./Loader";
 
 const ProtectedRoute = ({ children }) => {
@@ -18,7 +16,7 @@ const ProtectedRoute = ({ children }) => {
 
 
   if(!user){
-    <Loader />
+    return <Loader />
   }
 
   return <>{children}</>;

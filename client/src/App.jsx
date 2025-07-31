@@ -12,44 +12,54 @@ import { AuthStore } from "./Store/AuthStore";
 import Loader from "./components/Loader";
 // Fontawesome
 import { library } from "@fortawesome/fontawesome-svg-core";
-import {fas} from "@fortawesome/free-solid-svg-icons"
-import {far} from "@fortawesome/free-regular-svg-icons"
-import {fab} from "@fortawesome/free-brands-svg-icons"
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { far } from "@fortawesome/free-regular-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import Layout from "./components/Layout";
 
-library.add(fas, far, fab)
+library.add(fas, far, fab);
 
 function App() {
-  const {showToast, toastMessage, toastType,loading,setLoading} = useContext(AppStore)
-  const {setUser} = useContext(AuthStore)
-  const navigate = useNavigate()
+  const { showToast, toastMessage, toastType, loading, setLoading } =
+    useContext(AppStore);
+  const { setUser } = useContext(AuthStore);
+  const navigate = useNavigate();
 
-
-  const fetchUserDetails = async () =>{
-    setLoading(true)
+  const fetchUserDetails = async () => {
+    setLoading(true);
     try {
-      const res = await makeRequest.get('/auth/verify');
-      setUser(res.data.user)
-      navigate("/home")
+      const res = await makeRequest.get("/auth/verify");
+      setUser(res.data.user);
+      navigate("/home");
     } catch (error) {
-      console.log("Something went wrong: ",error);
-    }finally{
-      setLoading(false)
+      setUser(null);
+      navigate("/login");
+      console.log("Something went wrong: ", error);
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
-  useEffect(()=>{
-      fetchUserDetails()
-  },[])
-
-
+  useEffect(() => {
+    fetchUserDetails();
+  }, []);
 
   return (
     <>
       <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+        </Route>
       </Routes>
       {showToast && <Toast message={toastMessage} type={toastType} />}
       {loading && <Loader />}

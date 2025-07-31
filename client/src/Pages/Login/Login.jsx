@@ -2,12 +2,9 @@
 import { useContext } from 'react'
 import LoginForm from './components/LoginForm'
 import { AuthStore } from '../../Store/AuthStore'
+import Loader from '../../components/Loader'
 
 const Login = () => {
-
-    const {user} = useContext(AuthStore)
-    console.log("sdfsdf",user);
-    
 
   return (
     <div className="flex flex-col gap-5 items-center justify-center bg-gray-800 min-h-screen">
