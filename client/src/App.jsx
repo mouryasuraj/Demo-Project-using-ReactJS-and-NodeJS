@@ -16,6 +16,11 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import Layout from "./components/Layout";
+import ReturnPolicy from "./Pages/Policy/ReturnPolicy";
+import RefundPolicy from "./Pages/Policy/RefundPolicy";
+import PrivacyPolicy from "./Pages/Policy/PrivacyPolicy";
+import Disclaimer from "./Pages/Policy/Disclaimer";
+import AboutAndContact from "./Pages/Policy/AboutAndContact";
 
 library.add(fas, far, fab);
 
@@ -51,6 +56,12 @@ function App() {
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          {/* Policies */}
+          <Route path="/returnpolicy" element={<ReturnPolicy />} />
+          <Route path="/refundpolicy" element={<RefundPolicy />} />
+          <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
+          <Route path="/aboutandcontact" element={<AboutAndContact />} />
           <Route
             path="/home"
             element={
