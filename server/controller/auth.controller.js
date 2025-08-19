@@ -1,6 +1,7 @@
+
+import User from "../models/user.model.js";
 import handleError from "../utils/handleError.js";
-import { validateLoginData, validateSignUpData } from "../utils/validations.js";
-import User from "../models/user.js";
+import { validateLoginData, validateSignUpData } from "../utils/validations.js"
 import bcrypt from 'bcryptjs'
 
 

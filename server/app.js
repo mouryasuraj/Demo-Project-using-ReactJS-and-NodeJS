@@ -1,9 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./connections/connectDB.js";
-import authRouter from "./routes/auth.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import authRouter from "./routes/auth.router.js";
+import profileRouter from "./routes/profile.router.js";
+import userRouter from "./routes/user.router.js";
+import requestRouter from "./routes/request.router.js";
 dotenv.config();
 
 const port = process.env.PORT;
@@ -15,6 +18,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/auth", authRouter);
+app.use("/profile", profileRouter);
+app.use("/user", userRouter);
+app.use("/request", requestRouter);
 
 connectDB()
   .then(() => {

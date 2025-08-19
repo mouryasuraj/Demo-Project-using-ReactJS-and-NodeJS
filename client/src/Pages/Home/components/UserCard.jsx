@@ -5,18 +5,20 @@ import { handleSendRequest } from "../services/homeService";
 
 const UserCard = ({ user }) => {
   const {setFeed, setLoading} = useContext(AppStore)
-  const { _id, photoUrl, firstName, lastName, age, gender, about } = user;
+  const { _id, photoUrl, fullName, age, about } = user;
+
+  console.log("useruser",user);
+  
 
 
   return (
-    <div className="card bg-base-300 w-96 shadow-sm">
+    <div className="card bg-gray-600 w-96 shadow-sm">
       <figure className="p-3">
         <img src={photoUrl} alt="Shoes" className="h-[200px] rounded-xl" />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{firstName + " " + lastName}</h2>
-        <p>{age + ", " + gender}</p>
-        <p>{about}</p>
+        <h2 className="card-title">{fullName}</h2>
+        <p>{age}</p>
         <div className="card-actions justify-end">
           <button
             onClick={() => {

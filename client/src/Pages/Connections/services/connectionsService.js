@@ -6,10 +6,11 @@ export const handleFetchConnections = async (setConnections, setLoading) => {
 
   try {
     const res = await makeRequest.get("/user/connections");
-    setConnections(res.data.data);
+    setConnections(res?.data?.data || []);
   } catch (error) {
     console.log("Something went wrong: ", error);
   } finally {
     setLoading(false);
   }
 };
+

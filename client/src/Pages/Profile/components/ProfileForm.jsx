@@ -24,11 +24,8 @@ const ProfileForm = ({ userData, userId }) => {
 
 
   const payload = {
-    firstName,
-    lastName,
-    gender,
-    photoUrl,
-    about,
+    fullName:firstName+" "+lastName,
+    photoUrl
   };
 
   return (
@@ -68,21 +65,6 @@ const ProfileForm = ({ userData, userId }) => {
             />
           </div>
           <div>
-            <legend className="fieldset-legend">Gender</legend>
-            <select
-              onChange={(e) => {
-                setGender(e.target.value);
-              }}
-              defaultValue={gender}
-              value={gender}
-              className="select"
-            >
-              {genders.map((gender) => {
-                return <option>{gender}</option>;
-              })}
-            </select>
-          </div>
-          <div>
             <label className="">Photo URL</label>
             <input
               required
@@ -90,19 +72,6 @@ const ProfileForm = ({ userData, userId }) => {
               onChange={(e) => {
                 const inputVal = e.target.value;
                 setPhotoUrl(inputVal);
-              }}
-              type="text"
-              className="input mt-1 "
-            />
-          </div>
-          <div>
-            <label className="">About</label>
-            <input
-              required
-              value={about}
-              onChange={(e) => {
-                const inputVal = e.target.value;
-                setAbout(inputVal);
               }}
               type="text"
               className="input mt-1 "

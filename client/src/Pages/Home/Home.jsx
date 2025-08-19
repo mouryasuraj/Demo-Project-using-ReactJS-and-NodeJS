@@ -9,7 +9,7 @@ const Home = () => {
   const getAllFeed = async () => {
     try {
       const res = await makeRequest.get("/user/feed");
-      setFeed(res.data.data);
+      setFeed(res?.data?.data || []);
     } catch (error) {
       console.log("Something went wrong", error);
     }

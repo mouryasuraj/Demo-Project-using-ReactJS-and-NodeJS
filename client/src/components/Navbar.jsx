@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Navbar = () => {
   const { user, setUser } = useContext(AuthStore);
-  const { setLoading, loading } = useContext(AppStore);
+  const { setLoading, loading,setConnections, setFeed,setUserRequests } = useContext(AppStore);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -17,6 +17,9 @@ const Navbar = () => {
       const res = await makeRequest.get("/auth/logout");
       if (res.status === 200) {
         navigate("/login");
+        setConnections([])
+        setFeed([])
+        setUserRequests([])
         setUser(null);
       }
     } catch (error) {
@@ -110,7 +113,6 @@ const Navbar = () => {
           </Link>
         )}
       </div>
-      {loading && <Loader />}
     </div>
   );
 };

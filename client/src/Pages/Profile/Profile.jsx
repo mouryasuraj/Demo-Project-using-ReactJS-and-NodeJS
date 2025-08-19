@@ -14,14 +14,13 @@ const Profile = () => {
   const [about, setAbout] = useState("");
 
   useEffect(() => {
-    setFirstName(user.firstName);
-    setLastName(user.lastName);
-    setAge(user.age);
-    setAbout(user.about);
+    const [firstName, lastName] = user.fullName.split(" ")
+    console.log(user.fullName.split(" "));
+    setFirstName(firstName);
+    setLastName(lastName);
     setPhotoUrl(user.photoUrl);
-    setGender(user.gender);
   }, [user]);
-
+  
   return (
     <div className="flex items-stretch justify-center gap-5 mt-10">
       <ProfileForm

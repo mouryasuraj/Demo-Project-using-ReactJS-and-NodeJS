@@ -18,7 +18,7 @@ export const handleReviewConnection = async (setLoading,setUserRequests, status,
   try {
     const res = await makeRequest.post(`/request/review/${status}/${requestId}`)
     setMessage(res.data.message)
-    setUserRequests(prev => prev._id !== requestId)
+    setUserRequests(prev => prev.filter(item => item._id !== requestId))
   } catch (error) {
     console.error("Something went wrong: ", error);
   } finally {

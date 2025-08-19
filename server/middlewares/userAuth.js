@@ -1,4 +1,5 @@
-import User from "../models/user.js";
+
+import User from "../models/user.model.js";
 import { publicData } from "../utils/constants.js";
 import handleError from "../utils/handleError.js"
 import jwt from 'jsonwebtoken'
