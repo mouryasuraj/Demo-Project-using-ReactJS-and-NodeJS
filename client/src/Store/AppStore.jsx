@@ -2,12 +2,16 @@ import { createContext, useState } from "react";
 
 export const AppStore = createContext();
 
-
 const AppStoreProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [toastType, setToastType] = useState("");
+
+  // For Connections
+  const [connections, setConnections] = useState([]);
+  const [feed, setFeed] = useState([]);
+  const [userRequests, setUserRequests] = useState([]);
 
   return (
     <AppStore.Provider
@@ -19,7 +23,15 @@ const AppStoreProvider = ({ children }) => {
         toastType,
         setToastType,
         loading,
-        setLoading
+        setLoading,
+        connections,
+        setConnections,
+        feed,
+        setFeed,
+        userRequests,
+        setUserRequests,
+        userRequests, 
+        setUserRequests
       }}
     >
       {children}
@@ -27,4 +39,4 @@ const AppStoreProvider = ({ children }) => {
   );
 };
 
-export default AppStoreProvider
+export default AppStoreProvider;

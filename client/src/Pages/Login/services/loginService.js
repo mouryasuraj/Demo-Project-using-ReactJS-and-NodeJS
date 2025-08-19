@@ -5,7 +5,7 @@ export const handleLogin = async (email, password,navigate, setUser,setShowToast
     try {
         const payload = {email, password}
         const res = await makeRequest.post("/auth/login", payload)
-        setUser(res.data)
+        setUser(res.data.user)
         setShowToast(true)
         setToastMessage(res.data.message)
         setToastType("success") 
@@ -14,7 +14,7 @@ export const handleLogin = async (email, password,navigate, setUser,setShowToast
         console.log("Someting went wrong: ", error)
         setShowToast(true)
         setToastMessage(error.response.data.message)
-        setToastType("error")
+        setToastType("warning")
     }finally{
         setLoading(false)
         setTimeout(() => {

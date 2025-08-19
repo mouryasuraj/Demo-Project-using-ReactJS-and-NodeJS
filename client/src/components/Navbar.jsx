@@ -4,23 +4,25 @@ import Loader from "./Loader";
 import { AuthStore } from "../Store/AuthStore";
 import makeRequest from "../axios";
 import { AppStore } from "../Store/AppStore";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Navbar = () => {
-  const { user } = useContext(AuthStore)
-  const { setLoading, loading } = useContext(AppStore)
+  const { user, setUser } = useContext(AuthStore);
+  const { setLoading, loading } = useContext(AppStore);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const res = await makeRequest.post("/auth/logout");
+      const res = await makeRequest.get("/auth/logout");
       if (res.status === 200) {
         navigate("/login");
+        setUser(null);
       }
     } catch (error) {
       console.log("Something went wrong: ", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -28,20 +30,27 @@ const Navbar = () => {
     <div className="w-full sticky top-0 left-0 z-[100]">
       <div className="navbar bg-gray-900 text-white shadow-sm">
         <div className="flex-1">
-          <Link to="/home" className="cursor-pointer font-semibold text-xl">
+          <Link
+            to="/home"
+            className="flex items-center gap-2 cursor-pointer font-semibold text-xl"
+          >
             Developer Tinder
+            <FontAwesomeIcon
+              className="cursor-pointer text-xl"
+              icon={`fa-solid fa-house-user`}
+            />
           </Link>
         </div>
         {user ? (
           <div className="flex">
             <div className="indicator mr-10">
-              <Link to="/home/requests" className="btn btn-accent">
+              <Link to="/requests" className="btn btn-accent">
                 Connection Requests
               </Link>
             </div>
             <div className="flex items-center gap-3">
               <div>
-                <p>Welcome, {user && user?.firstName}</p>
+                <p>Welcome, {user && user?.fullName}</p>
               </div>
               <div className="dropdown dropdown-end mr-3">
                 <div
@@ -50,20 +59,30 @@ const Navbar = () => {
                   className="btn btn-ghost btn-circle avatar"
                 >
                   <div className="w-10 rounded-full">
-                    <img alt="Profile Picture" src={user?.photoUrl} />
+                    <img alt="Profile Picture" src={user && user?.photoUrl} />
                   </div>
                 </div>
                 <ul
                   tabIndex={0}
-                  className="menu menu-lg dropdown-content bg-base-200 rounded-box z-1 mt-3 w-52 p-2 shadow"
+                  className="menu menu-lg dropdown-content bg-gray-600 rounded-box z-1 mt-3 w-52 p-2 shadow"
                 >
                   <li>
-                    <Link to="/home/profile" className="justify-between">
+                    <Link to="/profile">
+                      <FontAwesomeIcon
+                        className="cursor-pointer"
+                        icon={`fa-solid fa-user`}
+                      />
                       Profile
                     </Link>
                   </li>
                   <li>
-                    <Link to="/home/connections">Connections</Link>
+                    <Link to="/connections">
+                      <FontAwesomeIcon
+                        className="cursor-pointer"
+                        icon={`fa-solid fa-people-line`}
+                      />
+                      Connections
+                    </Link>
                   </li>
                   <li>
                     <a
@@ -71,6 +90,10 @@ const Navbar = () => {
                         handleLogout();
                       }}
                     >
+                      <FontAwesomeIcon
+                        className="cursor-pointer"
+                        icon={`fa-solid fa-arrow-right-from-bracket`}
+                      />
                       Logout
                     </a>
                   </li>

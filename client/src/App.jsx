@@ -5,7 +5,6 @@ import Login from "./Pages/Login/Login";
 import Toast from "./components/Toast";
 import { useContext, useEffect } from "react";
 import { AppStore } from "./Store/AppStore";
-import Home from "./Pages/Home/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
 import makeRequest from "./axios";
 import { AuthStore } from "./Store/AuthStore";
@@ -21,6 +20,10 @@ import RefundPolicy from "./Pages/Policy/RefundPolicy";
 import PrivacyPolicy from "./Pages/Policy/PrivacyPolicy";
 import Disclaimer from "./Pages/Policy/Disclaimer";
 import AboutAndContact from "./Pages/Policy/AboutAndContact";
+import Home from "./Pages/Home/Home";
+import Profile from "./Pages/Profile/Profile";
+import Connections from "./Pages/Connections/Connections";
+import Request from "./Pages/Requests/Request";
 
 library.add(fas, far, fab);
 
@@ -67,6 +70,30 @@ function App() {
             element={
               <ProtectedRoute>
                 <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/connections"
+            element={
+              <ProtectedRoute>
+                <Connections />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/requests"
+            element={
+              <ProtectedRoute>
+                <Request />
               </ProtectedRoute>
             }
           />

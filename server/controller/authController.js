@@ -57,7 +57,8 @@ export const handleLogin = async (req,res) =>{
         const userData = {
             fullName:user.fullName,
             email:user.email,
-            _id:user._id
+            _id:user._id,
+            photoUrl:user.photoUrl
         }
         const token = await user.signJwt(userData)
 
