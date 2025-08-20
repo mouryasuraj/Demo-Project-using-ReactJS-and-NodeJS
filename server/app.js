@@ -17,10 +17,10 @@ app.use(cors({ origin: clientURL, credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-app.use("/auth", authRouter);
-app.use("/profile", profileRouter);
-app.use("/user", userRouter);
-app.use("/request", requestRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/profile", profileRouter);
+app.use("/api/user", userRouter);
+app.use("/api/request", requestRouter);
 
 connectDB()
   .then(() => {
