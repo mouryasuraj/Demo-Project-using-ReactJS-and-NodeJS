@@ -2,7 +2,7 @@ import React from "react";
 
 const Loader = () => {
   return (
-    <div className="w-screen h-screen bg-black opacity-[0.6] absolute top-0 left-0 z-[1000] flex items-center justify-center">
+    <div className="w-screen min-h-screen bg-black opacity-[0.6] fixed top-0 left-0 z-[1000] flex items-center justify-center">
       <span className="loading text-white loading-xl"></span>
     </div>
   );

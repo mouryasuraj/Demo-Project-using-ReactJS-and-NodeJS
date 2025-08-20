@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { handleSignUp } from "../services/signupServices";
 import { AppStore } from "../../../Store/AppStore";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,13 +7,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const SignUpForm = () => {
   const { setShowToast, setToastMessage, setToastType, setLoading } =
     useContext(AppStore);
+  const navigate = useNavigate()
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [age, setAge] = useState("");
-  const [photoUrl, setPhotoUrl] = useState("https://static.vecteezy.com/system/resources/previews/045/944/199/non_2x/male-default-placeholder-avatar-profile-gray-picture-isolated-on-background-man-silhouette-picture-for-user-profile-in-social-media-forum-chat-greyscale-illustration-vector.jpg"
-  );
+  const [photoUrl, setPhotoUrl] = useState("");
   const [showPassword, setShowPassword] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
 
   return (
     <form
@@ -34,7 +35,9 @@ const SignUpForm = () => {
           setFullName,
           setEmail,
           setPassword,
-          setLoading
+          setLoading,
+          setErrorMessage,
+          navigate
         );
       }}
     >
@@ -96,7 +99,7 @@ const SignUpForm = () => {
           placeholder="Photo URL"
         />
       </div>
-
+      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
       <div className="justify-end card-actions my-3">
         <button className="btn btn-primary w-full">Sign Up</button>
       </div>

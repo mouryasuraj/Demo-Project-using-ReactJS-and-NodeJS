@@ -30,8 +30,6 @@ const AppStoreProvider = ({ children }) => {
         setFeed,
         userRequests,
         setUserRequests,
-        userRequests, 
-        setUserRequests
       }}
     >
       {children}

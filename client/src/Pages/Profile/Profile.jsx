@@ -19,6 +19,7 @@ const Profile = () => {
     setFirstName(firstName);
     setLastName(lastName);
     setPhotoUrl(user.photoUrl);
+    setAge(user.age)
   }, [user]);
   
   return (
