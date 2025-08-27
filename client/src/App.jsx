@@ -24,6 +24,7 @@ import Home from "./Pages/Home/Home";
 import Profile from "./Pages/Profile/Profile";
 import Connections from "./Pages/Connections/Connections";
 import Request from "./Pages/Requests/Request";
+import Premium from "./Pages/Premium/Premium";
 
 library.add(fas, far, fab);
 
@@ -94,6 +95,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Request />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/premium"
+            element={
+              <ProtectedRoute>
+                <Premium />
               </ProtectedRoute>
             }
           />

@@ -79,6 +79,15 @@ const Navbar = () => {
                     </Link>
                   </li>
                   <li>
+                    <Link to="/premium">
+                      <FontAwesomeIcon
+                        className="cursor-pointer"
+                        icon={`fa-solid fa-crown`}
+                      />
+                      Premium
+                    </Link>
+                  </li>
+                  <li>
                     <Link to="/connections">
                       <FontAwesomeIcon
                         className="cursor-pointer"

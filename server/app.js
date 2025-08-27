@@ -7,6 +7,7 @@ import authRouter from "./routes/auth.router.js";
 import profileRouter from "./routes/profile.router.js";
 import userRouter from "./routes/user.router.js";
 import requestRouter from "./routes/request.router.js";
+import paymentRouter from "./routes/payment.router.js";
 dotenv.config();
 
 const port = process.env.PORT;
@@ -21,6 +22,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/profile", profileRouter);
 app.use("/api/user", userRouter);
 app.use("/api/request", requestRouter);
+app.use("/api/payment", paymentRouter);
 
 connectDB()
   .then(() => {
