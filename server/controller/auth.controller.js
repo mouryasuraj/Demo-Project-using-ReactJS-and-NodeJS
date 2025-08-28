@@ -23,7 +23,8 @@ export const handleSignUp = async (req, res) => {
         fullName:userCreated.fullName,
         email:userCreated.email,
         age:userCreated.age,
-        photoUrl:userCreated.photoUrl
+        photoUrl:userCreated.photoUrl,
+        isPremium:userCreated.isPremium
     } });
   } catch (error) {
     handleError(res, error);
@@ -59,7 +60,8 @@ export const handleLogin = async (req,res) =>{
             fullName:user.fullName,
             email:user.email,
             _id:user._id,
-            photoUrl:user.photoUrl
+            photoUrl:user.photoUrl,
+            isPremium:user.isPremium
         }
         const token = await user.signJwt(userData)
 

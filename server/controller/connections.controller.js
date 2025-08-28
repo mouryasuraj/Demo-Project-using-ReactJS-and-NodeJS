@@ -102,3 +102,14 @@ export const handleUserFeed = async (req, res) => {
     res.status(400).json({ message: "Something went wrong" });
   }
 };
+
+
+export const handleIsPremium = async (req,res) =>{
+  try {
+    const user = await User.findById(req.user._id)
+    res.json({message:"isPremium", isPremium:user.isPremium})    
+  } catch (error) {
+    console.log("Someting went wrong: ",error)
+    res.status(400).json({message:"Something went wrong"})
+  }
+}

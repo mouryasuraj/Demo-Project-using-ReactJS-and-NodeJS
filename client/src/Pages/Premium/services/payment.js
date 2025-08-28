@@ -1,7 +1,18 @@
 import makeRequest from "../../../axios";
 
+const handleVerifyPremium = async (setUser) =>{
+  try {
+    const res = await makeRequest.get("/user/ispremium")
+    setUser(prev => {
+      return {...prev, isPremium:res.data.isPremium}
+    })
+  } catch (error) {
+    console.log("Someting went wrong: ",error)
+  }
+}
 
-export const handlePayment = async (type) => {
+
+export const handlePayment = async (type, setUser) => {
   try {
     const res = await makeRequest.post(`/payment/createOrder?type=${type}`);
     const order = res.data.order || {}
@@ -24,7 +35,7 @@ export const handlePayment = async (type) => {
         color: "#F37254",
       },
       handler:()=>{
-        alert("Payment Successfully")
+        handleVerifyPremium(setUser)
       }
     };
     const rzp = new window.Razorpay(options);
