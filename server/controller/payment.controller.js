@@ -62,20 +62,17 @@ export const handleRazorWebhook = async (req, res) => {
         
         const paymentDetails = reqBody.payload.payment.entity
         
-        console.log("reqbody", paymentDetails);
-        console.log("reqbody", reqBody.payload.payment.entity);
         
         if(reqBody.event==="payment.captured"){
             // Change payment status 
-            console.log("inside success");
             const payment = await Payment.findOne({orderId:paymentDetails.order_id})
-            console.log("payment", payment);
             payment.status = paymentDetails.status
+            await payment.save()
             // Make user as premium member
             const user = await User.findById({_id:payment.userId})
-            console.log("user", user);
             user.isPremium = true 
             user.memberShipType = payment.memeberShipType
+            await user.save()
         }
         // if(reqBody.event==="payment.failed"){
 
