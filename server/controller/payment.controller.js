@@ -54,8 +54,9 @@ export const handleCreateOrder = async (req, res) => {
 export const handleRazorWebhook = async (req, res) => {
     try {
         const reqBody = req.body
-        const signature = req.headers['X-Razorpay-Signature']
+        const signature = req.get("X-Razorpay-Signature")
         const isWebhookValid = validateWebhookSignature(reqBody, signature, process.env.RAZORPAY_TEST_WEBHOOK_SECRET)
+        console.log(reqBody);
         console.log(isWebhookValid);
         if(!isWebhookValid){
             return res.status(400).json({message:"websignature is not valid"})
