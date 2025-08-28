@@ -56,24 +56,24 @@ export const handleRazorWebhook = async (req, res) => {
         const reqBody = req.body
         const signature = req.get("X-Razorpay-Signature")
         const isWebhookValid = validateWebhookSignature(JSON.stringify(reqBody), signature, process.env.RAZORPAY_TEST_WEBHOOK_SECRET)
-        console.log("reqBody",reqBody);
-        console.log("isWebhookValid",isWebhookValid);
-        console.log("env",process.env.RAZORPAY_TEST_WEBHOOK_SECRET);
-        console.log("signature",signature);
         if(!isWebhookValid){
-            console.log("not valid");
             return res.status(400).json({message:"websignature is not valid"})
         }
-
+        
         const paymentDetails = reqBody.payload.payment.entity
-
-        // Change payment status 
-        const payment = await Payment.findOne({orderId:paymentDetails.order_id})
-        payment.status = paymentDetails.status
-
-        // Make user as premium member
+        
+        console.log("reqbody", paymentDetails);
+        console.log("reqbody", reqBody.payload.payment.entity);
+        
         if(reqBody.event==="payment.captured"){
+            // Change payment status 
+            console.log("inside success");
+            const payment = await Payment.findOne({orderId:paymentDetails.order_id})
+            console.log("payment", payment);
+            payment.status = paymentDetails.status
+            // Make user as premium member
             const user = await User.findById({_id:payment.userId})
+            console.log("user", user);
             user.isPremium = true 
             user.memberShipType = payment.memeberShipType
         }
