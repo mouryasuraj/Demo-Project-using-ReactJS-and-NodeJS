@@ -55,7 +55,7 @@ export const handleRazorWebhook = async (req, res) => {
     try {
         const reqBody = req.body
         const signature = req.get("X-Razorpay-Signature")
-        const isWebhookValid = validateWebhookSignature(reqBody, signature, process.env.RAZORPAY_TEST_WEBHOOK_SECRET)
+        const isWebhookValid = validateWebhookSignature(JSON.stringify(reqBody), signature, process.env.RAZORPAY_TEST_WEBHOOK_SECRET)
         console.log("reqBody",reqBody);
         console.log("isWebhookValid",isWebhookValid);
         console.log("env",process.env.RAZORPAY_TEST_WEBHOOK_SECRET);
