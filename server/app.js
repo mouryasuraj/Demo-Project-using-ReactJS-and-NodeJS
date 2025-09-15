@@ -8,6 +8,8 @@ import profileRouter from "./routes/profile.router.js";
 import userRouter from "./routes/user.router.js";
 import requestRouter from "./routes/request.router.js";
 import paymentRouter from "./routes/payment.router.js";
+import {createServer} from 'http'
+import initializeSocket from "./connections/socket.js";
 dotenv.config();
 
 const port = process.env.PORT;
@@ -24,9 +26,14 @@ app.use("/api/user", userRouter);
 app.use("/api/request", requestRouter);
 app.use("/api/payment", paymentRouter);
 
+// Socket connection
+const server = createServer(app)
+initializeSocket(server)
+
+
 connectDB()
   .then(() => {
-    app.listen(port, () => {
+    server.listen(port, () => {
       console.log("Database connection established");
     });
   })

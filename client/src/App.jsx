@@ -25,6 +25,7 @@ import Profile from "./Pages/Profile/Profile";
 import Connections from "./Pages/Connections/Connections";
 import Request from "./Pages/Requests/Request";
 import Premium from "./Pages/Premium/Premium";
+import Chat from "./Pages/Chat/Chat";
 
 library.add(fas, far, fab);
 
@@ -103,6 +104,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Premium />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/chat/:userId"
+            element={
+              <ProtectedRoute>
+                <Chat />
               </ProtectedRoute>
             }
           />
