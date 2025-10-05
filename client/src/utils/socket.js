@@ -4,7 +4,7 @@ const createSocketConnection = () => {
   if (location.hostname === "localhost") {
     return io(import.meta.env.VITE_BACKEND_IP);
   } else {
-    return io("/", {path:"/api/socket.io"});
+    return io("/", {path:"/socket.io"});
   }
 };
 
