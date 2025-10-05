@@ -1,4 +1,5 @@
 import {Server} from 'socket.io'
+import generateRoomId from '../utils/generateRoomId.js'
 
 
 
@@ -9,9 +10,18 @@ const initializeSocket = (server) =>{
         }
     })
     io.on("connection", (socket)=>{
-        socket.on("joinchat", ()=>{
-            console.log("Chat has been joined");
-            
+        // To Join the chat with room id
+        socket.on("joinchat", ({fullName, toUserId, userId})=>{
+            const roomId = generateRoomId(userId, toUserId)
+            socket.join(roomId)
+            console.log(fullName, " has joined room ", roomId)
+        })
+
+        // Event on send message
+        socket.on("sendmessage", (data)=>{
+            const roomId = generateRoomId(data.userId, data.toUserId)
+            io.to(roomId).emit("messagereceived", data)
+            console.log("message sent successfully")
         })
     })
 
