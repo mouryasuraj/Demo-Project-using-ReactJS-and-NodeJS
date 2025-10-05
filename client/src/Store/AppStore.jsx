@@ -13,6 +13,9 @@ const AppStoreProvider = ({ children }) => {
   const [feed, setFeed] = useState([]);
   const [userRequests, setUserRequests] = useState([]);
 
+  // For Chat
+  const [currChatUser, setCurrChatUser] = useState(null)
+
   return (
     <AppStore.Provider
       value={{
@@ -30,6 +33,8 @@ const AppStoreProvider = ({ children }) => {
         setFeed,
         userRequests,
         setUserRequests,
+        currChatUser, 
+        setCurrChatUser
       }}
     >
       {children}

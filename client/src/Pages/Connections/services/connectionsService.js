@@ -14,3 +14,9 @@ export const handleFetchConnections = async (setConnections, setLoading) => {
   }
 };
 
+
+
+export const handleGotoChat = (navigate, id, chatUserData,setCurrChatUser) =>{
+  setCurrChatUser(chatUserData)
+  navigate(`/chat/${id}`)
+}

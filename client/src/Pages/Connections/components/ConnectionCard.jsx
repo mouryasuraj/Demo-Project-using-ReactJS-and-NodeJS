@@ -1,7 +1,15 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AppStore } from "../../../Store/AppStore";
+import { handleGotoChat } from "../services/connectionsService";
 
 const ConnectionCard = ({ connection }) => {
-  const { fullName, age, photoUrl,about,_id } = connection;
+  const { fullName, age, photoUrl, about, _id } = connection;
+  const { setCurrChatUser } = useContext(AppStore)
+  const navigate = useNavigate()
+
+
+
   return (
     <div className="flex gap-3 bg-gray-600 p-3 rounded-xl">
       <div>
@@ -13,7 +21,9 @@ const ConnectionCard = ({ connection }) => {
       </div>
       <div className="space-y-4">
         <h2 className="font-bold">{fullName}, {age && age}</h2>
-        <Link to={`/chat/${_id}`} className="btn ">💬 Chat</Link>
+        <p onClick={() => {
+          handleGotoChat(navigate, _id, connection, setCurrChatUser)
+        }} className="btn ">💬 Chat</p>
       </div>
     </div>
   );

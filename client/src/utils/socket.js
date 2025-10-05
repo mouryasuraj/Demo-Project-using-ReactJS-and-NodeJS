@@ -1,7 +1,11 @@
-import socket from 'socket.io-client'
+import io from "socket.io-client";
 
-const createSocketConnection = () =>{
-    return socket(import.meta.env.VITE_BACKEND_IP)
-}
+const createSocketConnection = () => {
+  if (location.hostname === "localhost") {
+    return io(import.meta.env.VITE_BACKEND_IP);
+  } else {
+    return io("/", {path:"/api/socket.io"});
+  }
+};
 
-export default createSocketConnection
+export default createSocketConnection;
