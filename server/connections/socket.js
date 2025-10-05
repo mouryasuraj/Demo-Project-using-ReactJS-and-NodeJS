@@ -6,8 +6,11 @@ import generateRoomId from '../utils/generateRoomId.js'
 const initializeSocket = (server) =>{
     const io = new Server(server, {
         cors:{
-            origin:process.env.CLIENT_URL
-        }
+            origin:process.env.CLIENT_URL,
+            methods:['GET','POST'],
+            credentials:true
+        },
+        path:"/socket.io/"
     })
     io.on("connection", (socket)=>{
         // To Join the chat with room id
