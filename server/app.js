@@ -10,6 +10,7 @@ import requestRouter from "./routes/request.router.js";
 import paymentRouter from "./routes/payment.router.js";
 import {createServer} from 'http'
 import initializeSocket from "./connections/socket.js";
+import chatRouter from "./routes/chat.router.js";
 dotenv.config();
 
 const port = process.env.PORT;
@@ -25,6 +26,7 @@ app.use("/api/profile", profileRouter);
 app.use("/api/user", userRouter);
 app.use("/api/request", requestRouter);
 app.use("/api/payment", paymentRouter);
+app.use("/api/chat", chatRouter);
 
 // Socket connection
 const server = createServer(app)

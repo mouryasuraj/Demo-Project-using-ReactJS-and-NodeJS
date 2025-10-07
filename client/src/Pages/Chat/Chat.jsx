@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import ChatItem from './components/ChatItem'
 import createSocketConnection from '../../utils/socket'
 import { AuthStore } from '../../Store/AuthStore'
-import { handleSendMessage } from './services/chatServices'
+import { getAllChat, handleSendMessage } from './services/chatServices'
 import { AppStore } from '../../Store/AppStore'
 
 const Chat = () => {
@@ -22,7 +22,6 @@ const Chat = () => {
         socket.emit("joinchat", { fullName: user.fullName, toUserId, userId: user._id })
 
         socket.on("messagereceived", (data) => {
-            console.log("maamamam",data)
             const chats = data.messages.map((msg) => {
                 return {
                     text: msg.text,
@@ -32,6 +31,8 @@ const Chat = () => {
             })
             setMessages(chats)
         })
+
+        getAllChat(toUserId, setMessages)
 
         return () => {
             socket.disconnect()
