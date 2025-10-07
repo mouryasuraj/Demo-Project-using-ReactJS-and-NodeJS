@@ -47,6 +47,9 @@ const Chat = () => {
     }, [messages])
 
 
+    console.log("lengthtttt",messages.length);
+    
+
 
 
     return (
