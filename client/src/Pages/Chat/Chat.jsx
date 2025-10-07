@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ChatItem from './components/ChatItem'
 import createSocketConnection from '../../utils/socket'
@@ -10,6 +10,7 @@ const Chat = () => {
     const { toUserId } = useParams()
     const { user } = useContext(AuthStore)
     const { currChatUser, setCurrChatUser } = useContext(AppStore)
+    const chatContainer = useRef(null)
 
     const [chatVal, setChatVal] = useState("")
     const [messages, setMessages] = useState([])
@@ -32,7 +33,12 @@ const Chat = () => {
         }
     }, [])
 
-    console.log("currewewr", currChatUser);
+    useEffect(()=>{
+        if(chatContainer.current){
+            chatContainer.current.scrollTop = chatContainer.current.scrollHeight
+        }
+    },[messages])
+
 
 
 
@@ -51,7 +57,7 @@ const Chat = () => {
                 <h2 className='text-gray-300 p-3'>{currChatUser.fullName}</h2>
             </div>
             <div className='border-t-2 rounded-lg border-gray-500 mb-3'></div>
-            <div className='flex-1 px-4 overflow-auto'>
+            <div ref={chatContainer} className='flex-1 px-4 scroll-smooth overflow-auto'>
                 {messages.map((message, index) => {
                     return <ChatItem key={index} message={message} />
                 })}
