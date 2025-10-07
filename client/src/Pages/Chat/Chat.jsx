@@ -22,9 +22,15 @@ const Chat = () => {
         socket.emit("joinchat", { fullName: user.fullName, toUserId, userId: user._id })
 
         socket.on("messagereceived", (data) => {
-            setMessages(prev => {
-                return [...prev, data]
+            console.log("maamamam",data)
+            const chats = data.messages.map((msg) => {
+                return {
+                    text: msg.text,
+                    userId: msg.userId,
+                    createdAt:msg.createdAt
+                }
             })
+            setMessages(chats)
         })
 
         return () => {
@@ -33,11 +39,11 @@ const Chat = () => {
         }
     }, [])
 
-    useEffect(()=>{
-        if(chatContainer.current){
+    useEffect(() => {
+        if (chatContainer.current) {
             chatContainer.current.scrollTop = chatContainer.current.scrollHeight
         }
-    },[messages])
+    }, [messages])
 
 
 
@@ -45,14 +51,14 @@ const Chat = () => {
     return (
         <div className='w-[70%] text-gray-300  min-h-[70vh] max-h-[70vh] border-2 rounded-lg border-gray-500 flex flex-col mx-auto'>
             <div className='flex items-center px-2'>
-                 <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn btn-ghost btn-circle avatar"
+                <div
+                    tabIndex={0}
+                    role="button"
+                    className="btn btn-ghost btn-circle avatar"
                 >
-                  <div className="w-10 rounded-full">
-                    <img alt="Profile Picture" src={currChatUser && currChatUser?.photoUrl} />
-                  </div>
+                    <div className="w-10 rounded-full">
+                        <img alt="Profile Picture" src={currChatUser && currChatUser?.photoUrl} />
+                    </div>
                 </div>
                 <h2 className='text-gray-300 p-3'>{currChatUser.fullName}</h2>
             </div>
