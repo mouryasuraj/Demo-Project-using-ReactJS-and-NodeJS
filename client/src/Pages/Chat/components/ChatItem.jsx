@@ -8,11 +8,14 @@ const ChatItem = ({ message }) => {
     const isUserIdSame = message.userId === user._id
     const date = parseISO(message?.createdAt)
 
+    console.log("isUserIdSame",isUserIdSame);
+    
+
     
 
     return (
         <div>
-            <div className={`chat space-y-1 chat-${isUserIdSame ? "end" : "start"}`}>
+            <div className={`chat space-y-1 flex flex-col items-${message.userId === user._id ? "end" : "start"}`}>
                 <div className="chat-header">
                     <time className="text-xs opacity-50">{format(date, "d LLL HH:mm")}</time>
                 </div>
