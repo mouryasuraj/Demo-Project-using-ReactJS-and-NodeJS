@@ -15,7 +15,7 @@ const ChatItem = ({ message }) => {
 
     return (
         <div>
-            <div className={`chat space-y-1 flex flex-col items-${message.userId === user._id ? "end" : "start"}`}>
+            <div className={`chat space-y-1 flex flex-col ${isUserIdSame ? "items-end" : "items-start"}`}>
                 <div className="chat-header">
                     <time className="text-xs opacity-50">{format(date, "d LLL HH:mm")}</time>
                 </div>
